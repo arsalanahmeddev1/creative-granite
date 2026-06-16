@@ -1,0 +1,5 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { PortfolioGrid, SectionLabel } from "@/components/luxury-site";
+const names: Record<string,string> = { kitchens: "Kitchens", vanities: "Vanities", showers: "Showers", fireplaces: "Fireplaces", "parade-of-homes": "Parade of Homes", videos: "Videos" };
+export const Route = createFileRoute("/portfolio/$slug")({ head: ({ params }) => ({ meta: [{ title: `${names[params.slug] ?? "Portfolio"} | Creative Granite & Design` }, { name: "description", content: `Explore ${names[params.slug] ?? "portfolio"} projects from Creative Granite & Design.` }] }), component: PortfolioCategoryPage });
+function PortfolioCategoryPage() { const { slug } = Route.useParams(); const category = names[slug] ?? "All"; return <section className="px-5 pb-24 pt-40 md:px-10"><div className="mx-auto max-w-7xl"><SectionLabel>Portfolio Category</SectionLabel><h1 className="font-display text-7xl md:text-9xl">{category}</h1><div className="mt-12"><PortfolioGrid category={category} /></div></div></section>; }
